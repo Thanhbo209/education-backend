@@ -2,6 +2,7 @@ import express from "express";
 import "dotenv/config";
 import subjectsRouter from "./routes/subjects";
 import cors from "cors";
+import "dotenv/config";
 const app = express();
 const port = 8000;
 
