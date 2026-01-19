@@ -4,6 +4,9 @@ import subjectsRouter from "./routes/subjects";
 import cors from "cors";
 import "dotenv/config";
 import securityMiddleware from "./middleware/security";
+import { auth } from "./lib/auth";
+import { toNodeHandler } from "better-auth/node";
+
 const app = express();
 const port = 8000;
 
@@ -17,6 +20,9 @@ app.use(
     credentials: true,
   })
 );
+
+app.all("/api/auth/*splat", toNodeHandler(auth)); // better-auth route handler
+
 app.use(express.json());
 app.use(securityMiddleware);
 
