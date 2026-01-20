@@ -6,7 +6,8 @@ import "dotenv/config";
 import securityMiddleware from "./middleware/security";
 import { auth } from "./lib/auth";
 import { toNodeHandler } from "better-auth/node";
-
+import AgentAPI from "apminsight";
+AgentAPI.config();
 const app = express();
 const port = 8000;
 
@@ -18,7 +19,7 @@ app.use(
     origin: process.env.FRONTEND_URL,
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
-  })
+  }),
 );
 
 app.all("/api/auth/*splat", toNodeHandler(auth)); // better-auth route handler
