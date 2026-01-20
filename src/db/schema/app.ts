@@ -9,7 +9,7 @@ import {
   timestamp,
   varchar,
 } from "drizzle-orm/pg-core";
-import { user } from "./auth";
+import { user } from "./auth.js";
 
 const timestamps = {
   createdAt: timestamp("created_at").defaultNow().notNull(),
@@ -74,7 +74,7 @@ export const classes = pgTable(
   (table) => ({
     subjectIdIdx: index("classes_subject_id_idx").on(table.subjectId),
     teacherIdIdx: index("classes_teacher_id_idx").on(table.teacherId),
-  })
+  }),
 );
 
 export const enrollments = pgTable(
@@ -96,9 +96,9 @@ export const enrollments = pgTable(
     classIdIdx: index("enrollments_class_id_idx").on(table.classId),
     studentClassUnique: index("enrollments_student_class_unique").on(
       table.studentId,
-      table.classId
+      table.classId,
     ),
-  })
+  }),
 );
 
 export const departmentsRelations = relations(departments, ({ many }) => ({
